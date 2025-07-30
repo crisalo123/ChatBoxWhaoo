@@ -4,6 +4,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const cors = require("cors");
 const axios = require("axios");
+require("dotenv").config();
 
 const app = express();
 const server = http.createServer(app);
@@ -15,10 +16,10 @@ const io = socketIo(server, {
   },
 });
 
+const baseUrl = process.env.PRODUCT_API_URL;
+
 const resPuestaProducto = async (id) => {
-  const response = await axios.get(
-    `https://apiwahoo-hkc4bxhedscqgwh4.eastus2-01.azurewebsites.net/api/v1/Producto/ListProducto?IdProducto=${id}`
-  );
+  const response = await axios.get(`${baseUrl}=${id}`);
   const data = response.data;
   if (data && data.length > 0) {
     return data[0]; // Retorna el primer producto encontrado
