@@ -53,13 +53,13 @@ io.on("connection", (socket) => {
 
     const text = message.toLowerCase();
 
-    if (text.includes("hola")) {
-      response = "¡Hola! ¿Cómo estás?";
-    } else if (text.includes("ayuda")) {
-      response = "En qué puedo ayudarte?";
+    if (text.includes("hola") || text.includes("buenos días")) {
+      response = "¡Hola! ¿Cómo estás hoy?";
+    } else if (text.includes("ayuda") || text.includes("asistencia")) {
+      response = "Claro, dime en qué necesitas ayuda.";
     } else if (text.includes("precio") || text.includes("costo")) {
       response =
-        "Claro para saber el costo de tu producto buscalo por id o nombre, por ejemplo producto con id:";
+        "Puedes preguntarme por el precio de un producto usando su ID.";
     } else if (text.includes("producto")) {
       const idMatch = text.match(/\b(\d+)\b/);
       if (idMatch) {
@@ -86,12 +86,32 @@ io.on("connection", (socket) => {
       } else {
         response = "Por favor, proporciona un ID de producto válido.";
       }
-    } else if (text.includes("adiós")) {
-      response = "¡Adiós! Que tengas un buen día.";
-    } else if (text.includes("gracias")) {
-      response = "¡De nada! Estoy aquí para ayudarte.";
+    } else if (text.includes("disponible") || text.includes("stock")) {
+      response = "Para saber si un producto está disponible, indícame su ID.";
+    } else if (
+      text.includes("contacto") ||
+      text.includes("hablar con alguien")
+    ) {
+      response =
+        "Puedes escribirnos al WhatsApp 320-123-4567 o llamar al 018000-XXX-XXX.";
+    } else if (text.includes("horario") || text.includes("abren")) {
+      response =
+        "Nuestro horario es de lunes a viernes de 8:00 a.m. a 6:00 p.m.";
+    } else if (text.includes("envío") || text.includes("domicilio")) {
+      response =
+        "Hacemos envíos a todo el país. El costo varía según la ubicación.";
+    } else if (text.includes("forma de pago") || text.includes("pago")) {
+      response =
+        "Aceptamos pagos con tarjeta de crédito, débito, PSE y contra entrega.";
+    } else if (text.includes("devolución") || text.includes("reembolso")) {
+      response =
+        "Puedes solicitar una devolución dentro de los 5 días hábiles posteriores a la compra.";
+    } else if (text.includes("gracias") || text.includes("muchas gracias")) {
+      response = "¡Con gusto! Estoy aquí para ayudarte.";
+    } else if (text.includes("adiós") || text.includes("chau")) {
+      response = "¡Hasta luego! Que tengas un buen día.";
     } else {
-      response = "Lo siento, no entendí tu mensaje.";
+      response = "No entendí tu mensaje. ¿Podrías reformularlo?";
     }
 
     setTimeout(() => {
